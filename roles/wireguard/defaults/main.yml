@@ -1,0 +1,18 @@
+---
+# defaults file for wireguard
+network_device: ""
+dns_resolver: "8.8.8.8,1.1.1.1"
+allowed_ips: ""
+endpoint: ""
+wireguard_directory: "{{ '/etc/wireguard' }}"
+wireguard_port: "51820"
+wireguard_cidr: "192.168.100.0/24"
+wireguard_interface: "wg0"
+wireguard_conf_owner: "root"
+wireguard_conf_group: "root"
+wireguard_conf_mode: 0600
+wireguard_service_enabled: "yes"
+wireguard_service_state: "started"
+wireguard_private_key: ""
+wireguard_public_key: ""
+wireguard_preshared_key: ""

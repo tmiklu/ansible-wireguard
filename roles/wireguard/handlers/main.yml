@@ -1,0 +1,12 @@
+---
+- name: Restart wireguard
+  ansible.builtin.service:
+    name: wg-quick@{{ wireguard_interface }}
+    state: "{{ item }}"
+  loop:
+    - stopped
+    - started
+#  when:
+#    - wireguard_service_enabled == "yes"
+  listen: reconfigure wireguard
+

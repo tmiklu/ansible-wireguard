@@ -1,0 +1,63 @@
+---
+- name: (Ubuntu) Update APT package cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: (Ubuntu) Ensure WireGuard DKMS package is removed
+  ansible.builtin.apt:
+    name:
+      - wireguard-dkms
+    state: absent
+
+- name: (Ubuntu) Install packages
+  apt:
+    pkg:
+      - wireguard
+      - iptables
+    state: present
+    update_cache: true
+
+- ansible.posix.sysctl:
+    name: net.ipv4.ip_forward
+    value: '1'
+    sysctl_set: true
+    state: present
+    reload: true
+  register: ip_forward
+
+- name: Create Wireguard configuration directory
+  ansible.builtin.file:
+    path: "{{ wireguard_directory }}"
+    state: directory
+    mode: '0750'
+    recurse: no
+    owner: root
+    group: root
+  register: wg_dir
+
+- name: Generate WireGuard configuration file
+  ansible.builtin.template:
+    src: templates/wg.conf.j2
+    dest: "{{ wireguard_directory }}/{{ wireguard_interface }}.conf"
+    owner: "{{ 'root' }}"
+    group: "{{ 'root' }}"
+    mode: "{{ '0640' }}"
+
+- name: Start and enable WireGuard service
+  ansible.builtin.service:
+    name: wg-quick@{{ wireguard_interface }}
+    state: "{{ wireguard_service_state }}"
+    enabled: "{{ wireguard_service_enabled }}"
+
+- name: Create vpn users and assign preshared key
+  ansible.builtin.shell: |
+    wg set wg0 peer {{ item.pubkey }} allowed-ips {{ item.ip }}
+    wg set wg0 peer {{ item.pubkey }} preshared-key <(echo -n {{ wireguard_preshared_key }})
+  loop: "{{ users }}"
+  args:
+    executable: /bin/bash
+
+- name: show templating results
+  ansible.builtin.debug:
+    msg: "{{ lookup('ansible.builtin.template', 'templates/config.j2') }}"

@@ -1,0 +1,15 @@
+{% for user in users %}
+# {{ user.name }}
+[Interface]
+PrivateKey = <{{ user.name }} privatekey>
+Address = {{ user.ip }}
+DNS = {{ dns_resolver }}
+
+[Peer]
+PublicKey = {{ wireguard_public_key }}
+PresharedKey = {{ wireguard_preshared_key }}
+AllowedIPs = {{ allowed_ips }}
+Endpoint = {{ endpoint }}:{{ wireguard_port }}
+PersistentKeepalive = 25
+
+{% endfor %}
