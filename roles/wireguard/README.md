@@ -34,9 +34,28 @@ Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+---
+- hosts: wireguard
+  gather_facts: no
+  become: yes
+  roles:
+    - wireguard
+  vars:
+    users:
+      - name: "tomas.miklusicak"
+        ip: "192.168.100.10/32"
+        pubkey: "OTyanWqP4jJY8AhuCk88lFIfqkNtPKPuFDemMhJF0x0="
+      - name: "frantisek.petr"
+        ip: "192.168.100.11/32"
+        pubkey: "VIMW39knTaC4J3hoQjQ+VbUAXg4DMaIeepjrvz+T1Vw="
+
+    network_device: "ens5"
+    dns_resolver: "10.0.0.2"
+    allowed_ips: "10.0.0.0/16"
+    endpoint: "3.75.37.152"
+    wireguard_private_key: "{{ lookup('amazon.aws.aws_secret', 'emeldi-master-ec2-wireguard-cryptographic-keys.privatekey', nested=True) }}"
+    wireguard_public_key: "{{ lookup('amazon.aws.aws_secret', 'emeldi-master-ec2-wireguard-cryptographic-keys.publickey', nested=True) }}"
+    wireguard_preshared_key: "{{ lookup('amazon.aws.aws_secret', 'emeldi-master-ec2-wireguard-cryptographic-keys.presharedkey', nested=True) }}"
 
 License
 -------
