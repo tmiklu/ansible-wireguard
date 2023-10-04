@@ -43,12 +43,12 @@ Including an example of how to use your role (for instance, with variables passe
     - wireguard
   vars:
     users:
-      - name: "tomas.miklusicak"
+      - name: "name"
         ip: "192.168.100.10/32"
-        pubkey: "OTyanWqP4jJY8AhuCk88lFIfqkNtPKPuFDemMhJF0x0="
-      - name: "frantisek.petr"
+        pubkey: "ATyhnWqP5jJY8AhuCk88lFIfqkNtPKPuFDemMhJF0x0="
+      - name: "name"
         ip: "192.168.100.11/32"
-        pubkey: "VIMW39knTaC4J3hoQjQ+VbUAXg4DMaIeepjrvz+T1Vw="
+        pubkey: "YIVW39knTaC4J1hoQjQ+VbUAXg4DMaIeepjrvz+T1Vw="
 
     network_device: "ens5"
     dns_resolver: "10.0.0.2"
