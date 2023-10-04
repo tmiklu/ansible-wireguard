@@ -34,6 +34,7 @@ Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
+```
 ---
 - hosts: wireguard
   gather_facts: no
@@ -56,6 +57,7 @@ Including an example of how to use your role (for instance, with variables passe
     wireguard_private_key: "{{ lookup('amazon.aws.aws_secret', 'emeldi-master-ec2-wireguard-cryptographic-keys.privatekey', nested=True) }}"
     wireguard_public_key: "{{ lookup('amazon.aws.aws_secret', 'emeldi-master-ec2-wireguard-cryptographic-keys.publickey', nested=True) }}"
     wireguard_preshared_key: "{{ lookup('amazon.aws.aws_secret', 'emeldi-master-ec2-wireguard-cryptographic-keys.presharedkey', nested=True) }}"
+```
 
 License
 -------
