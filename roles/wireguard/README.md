@@ -46,15 +46,15 @@ main.yml
     users:
       - name: "name"
         ip: "192.168.100.10/32"
-        pubkey: "ATyhnWqP5jJY8AhuCk88lFIfqkNtPKPuFDemMhJF0x0="
+        pubkey: "ATyhnWqP5jJY8AhuCk88ltIfqkNtPKPuFDemMhJF0x0="
       - name: "name"
         ip: "192.168.100.11/32"
-        pubkey: "YIVW39knTaC4J1hoQjQ+VbUAXg4DMaIeepjrvz+T1Vw="
+        pubkey: "YIVW39knTaC4J1hoQjQ+VbUAXg4iMaIeepjrvz+T1Vw="
 
     network_device: "ens5"
     dns_resolver: "10.0.0.2"
     allowed_ips: "10.0.0.0/16"
-    endpoint: "3.75.37.152"
+    endpoint: "3.75.37.6"
     wireguard_private_key: "{{ lookup('amazon.aws.aws_secret', 'emeldi-master-ec2-wireguard-cryptographic-keys.privatekey', nested=True) }}"
     wireguard_public_key: "{{ lookup('amazon.aws.aws_secret', 'emeldi-master-ec2-wireguard-cryptographic-keys.publickey', nested=True) }}"
     wireguard_preshared_key: "{{ lookup('amazon.aws.aws_secret', 'emeldi-master-ec2-wireguard-cryptographic-keys.presharedkey', nested=True) }}"
