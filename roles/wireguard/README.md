@@ -60,6 +60,13 @@ main.yml
     wireguard_preshared_key: "{{ lookup('amazon.aws.aws_secret', 'emeldi-master-ec2-wireguard-cryptographic-keys.presharedkey', nested=True) }}"
 ```
 
+Run
+-------
+```
+ansible-galaxy install -r requirements.yml
+ansible-playbook main.yaml -i inv
+```
+
 License
 -------
 
