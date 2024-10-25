@@ -60,4 +60,4 @@
 
 - name: show templating results
   ansible.builtin.debug:
-    msg: "{{ lookup('ansible.builtin.template', 'templates/config.j2') }}"
+    msg: "{{ lookup('ansible.builtin.template', 'templates/config.j2').split('\n') }}"
